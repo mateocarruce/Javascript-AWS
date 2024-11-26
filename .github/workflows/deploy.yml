@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to EC2 instances
         run: |
           for IP in 34.239.128.197 44.202.154.238 54.208.53.19 54.211.195.173 3.86.147.16; do
-            ssh -o StrictHostKeyChecking=no ec2-user@$IP << 'EOF'
+            ssh -o StrictHostKeyChecking=no ec2-user@$IP <<EOF
               if [ ! -d "/home/ec2-user/Javascript-AWS" ]; then
                 git clone https://github.com/mateocarruce/Javascript-AWS.git
               fi
@@ -38,5 +38,5 @@ jobs:
               git pull origin main  # Actualizar los archivos del repositorio
               sudo cp index.html /var/www/html/  # Copiar index.html al directorio de Nginx
               sudo systemctl restart nginx  # Reiniciar Nginx
-            EOF
+              EOF
           done
